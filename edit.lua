@@ -72,6 +72,7 @@ function edit:mousepressed(x, y, button)
 end
 
 function edit:keypressed(key, unicode)
+	print("key pressed " .. key .. "\n");
   if key == 'escape' then
     editing.object = nil
   end

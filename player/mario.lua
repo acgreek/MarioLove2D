@@ -1,5 +1,6 @@
 require "subclass/class.lua"
 require "subclass/sfx.lua"
+require "player/object/portal_gun.lua"
 mario = class:new()
 local sfx = soundfx:new()
 
@@ -18,6 +19,7 @@ local right = {}
 
 mario.coins = 0 --number of coins
 mario.lives = 3
+mario.active_tool = portal_gun:new()
 
 function mario:init(up, down, left, right)
   self.body = love.physics.newBody(world, 100 , 500,10,0)
@@ -49,6 +51,10 @@ function mario:collide(shapeData)
   local bX = self.body:getX()
   local bY = self.body:getY()
   --is it below?
+  if ( shapeData:getString() == "pulse") then 
+	  return ;
+  end
+ 
   
   if sY > self.body:getY() and sY - sHeight / 2 >= bY + bHeight / 2 - 5 and sX - sWidth / 2 < bX + bWidth / 2 and sX + sWidth / 2 > bX - bWidth / 2 and shapeData:getIsJumpable() then
     self.canJump = true
@@ -63,6 +69,7 @@ function mario:collide(shapeData)
 end
 
 function mario:draw()
+  self.active_tool:draw(self);
   local newX = self.body:getX() - screenX
  
   if self.canJump then
@@ -236,6 +243,7 @@ function mario:keyPressed(key)
 end
 
 function mario:update(dt)
+  self.active_tool:update(dt);
   if self.dead then
 	if love.keyboard.isDown('return') then
 		self.lives = self.lives - 1

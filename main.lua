@@ -1,6 +1,6 @@
 require "menu.lua"
 require "subclass/padding.lua"
---require "edit.lua"
+require "edit.lua"
 
 sWidth, sHeight = 1280, 640
 local screenSpeed = 0
@@ -71,6 +71,9 @@ function add(shape1, shape2, collision)
   end
   if shape2.getString then
     sString2 = shape2:getString()
+  end
+  if (sString1 == "pulse" or sString2 == "pulse") then 
+	  return;
   end
 
   if sString1 == "brick" then

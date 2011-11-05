@@ -44,11 +44,15 @@ function drawTheLine(mx,my,x, y)
 end
 
 function drawSlopedLine(slope,b, dx,dy,mx, my)
-	if (dx < 0 and dy < 0)  then 
+
+	-- top left quadrant 
+	if (dx < 0 and dy < 0)  then  
+		--left wall
 		if (b >=0 and b <= sHeight) then 
 			love.graphics.line(mx, my, 0, b)
 			return 
 		end
+		-- ceiling 
 		local nx = -b/slope
 		if (nx >= 0 and nx <=sWidth)then 
 			love.graphics.line(mx, my, nx, 0)
@@ -56,43 +60,51 @@ function drawSlopedLine(slope,b, dx,dy,mx, my)
 		end
 
 	end
+	-- bottom left quadrant 
 	if (dx < 0 and dy > 0)  then 
+		--left wall
 		if (b >=0 and b <= sHeight) then 
 			love.graphics.line(mx, my, 0, b)
 			return 
 		end
+		-- bottom
 		local nx = (sHeight - b)/slope
 		if (nx >= 0 and nx <sWidth)then 
 			love.graphics.line(mx, my, nx, sHeight)
 			return 
 		end
 	end
+	-- top right quadrant 
 	if (dx > 0 and dy < 0)  then 
+		--ceiling 
 		local nx = -b/slope
 		if (nx >= 0 and nx <= (sWidth))then 
 			love.graphics.line(mx, my, nx, 0)
 			return 
 		end
+		-- right wall
 		local ny = (slope *  sWidth) + b
 		if (ny >= 0 and ny <= (sHeight))then 
 			love.graphics.line(mx, my, sWidth, ny)
 			return 
 		end
 	end
+	-- bottom right quadrant 
 	if (dx > 0 and dy > 0)  then 
-
+		-- right wall
 		local ny = (slope *  sWidth) + b
 		if (ny >= 0 and ny <= (sHeight))then 
 			love.graphics.line(mx, my, sWidth, ny)
 			return 
 		end
+		-- bottom
 		local nx = (sHeight - b)/slope
 		if (nx >= 0 and nx <sWidth)then 
 			love.graphics.line(mx, my, nx, sHeight)
 			return 
 		end
 	end
-
+	drawStraighLine(mx,my,x, y);
 end
 
 function portal_gun:draw(mario) 
@@ -111,9 +123,6 @@ function portal_gun:draw(mario)
 		drawSlopedLine (slope,b,dx, dy,  mx, my)
 		local nx = -b/slope
   		love.graphics.print("gun should show. Slope y = " .. slope ..  " " .. b .. " " .. dx .. " " .. dy .. " " .. nx , 32, 120)
-		drawTheLine(mx,my,x, y);
 
-	--	self.pulses [#self.pulses + 1] = pulse:new(mx, my);
-	--	self.pulses [#self.pulses].body:applyImpulse(dx, dy,0,0);
 	end
 end

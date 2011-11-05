@@ -1,0 +1,3 @@
+#!/bin/bash
+rm mario.love res
+zip mario.love `find -not -name "*~" -and -not -path "./${0}"`

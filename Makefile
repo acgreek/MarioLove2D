@@ -1,0 +1,6 @@
+
+
+PHONE: run
+
+run:
+	love .	

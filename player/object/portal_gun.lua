@@ -7,6 +7,7 @@ function portal_gun:init()
 	self.mouse ={}
   	self.mouse.x, self.mouse.y = love.mouse.getPosition()
 	self.time_till_no_gun_show = os.time()-10
+	self.pulses = {} ;
 end
 
 function portal_gun:update(dt)
@@ -105,6 +106,14 @@ function drawSlopedLine(slope,b, dx,dy,mx, my)
 		end
 	end
 	drawStraighLine(mx,my,x, y);
+end
+function portal_gun:keypressed(key ) 
+
+	if (key == 'z') then 
+		self.pulses[#self.pulses +1] = pulse:new()
+	end
+
+
 end
 
 function portal_gun:draw(mario) 

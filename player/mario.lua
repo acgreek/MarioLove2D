@@ -240,6 +240,7 @@ function mario:keyPressed(key)
   if key == self.key.up then
     self:jump()
   end
+  mario.active_tool:keypressed(key)
 end
 
 function mario:update(dt)

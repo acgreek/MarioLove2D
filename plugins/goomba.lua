@@ -29,11 +29,13 @@ function goomba:setData()
   self.shape:getData():setIsJumpable(true)
 end
 
-function goomba:update(dt)
-  if self.sleeping then
+function goomba:update(dt, i )
+  if self.sleeping == true then
     if self.body:getX() - 16 < screenX + sWidth then
       self.sleeping = false
       self.body:wakeUp()
+    else 
+      return 
     end
   else
 
@@ -113,7 +115,13 @@ function goomba:switchDirection()
   end
 end
 
-function goomba:draw()
+function goomba:draw(i)
+	if self.sleeping == true then 
+		s = "true"
+	else
+		s = "false"
+	end
+--    love.graphics.print("GOOBA "..  s .. " " ..self.body:getX() - 16 .. " < " .. screenX + sWidth  , 60, 32 *i)
   local newX = self.body:getX() - screenX
   self.image:draw(newX - 16,self.body:getY() - 16)
 end

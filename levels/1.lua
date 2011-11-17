@@ -78,7 +78,7 @@ function lvl1:update(dt)
   end
 
   for i=1, #self.goomba do
-    self.goomba[i]:update(dt)
+    self.goomba[i]:update(dt,i)
   end
 
   for i=1, #self.coins do
@@ -101,7 +101,7 @@ function lvl1:draw()
   end
 
   for i=1, #self.goomba do
-    self.goomba[i]:draw()
+    self.goomba[i]:draw(i)
   end
 
   for i=1, #self.ground do

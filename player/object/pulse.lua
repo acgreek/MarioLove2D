@@ -1,11 +1,11 @@
 require "subclass/class.lua"
 pulse = class:new()
 
-pulse.radius = 4
+pulse.radius = 20
 
 function pulse:init(x, y ) 
-  self.body = love.physics.newBody(world, x+pulse.radius, y+pulse.radius)
-  self.shape = love.physics.newCircleShape(self.body, 0, 0,1)
+  self.body = love.physics.newBody(world, x, y)
+  self.shape = love.physics.newCircleShape(self.body, 0, 0,10)
   self.shape:setData(sdata:new())
   self.isOffScreen = false
   self:setData()

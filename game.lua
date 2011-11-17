@@ -29,6 +29,7 @@ function game:mousepressed(x, y, button)
 end
 
 function game:reloadLevel()
+	screenX=0;	
 	self:newWorlds()
 	level = lvl1:new()
 end

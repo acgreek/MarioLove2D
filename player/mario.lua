@@ -61,10 +61,10 @@ function mario:collide(shapeData)
     self.jumpWall = nil
   --is it to the left?
   elseif sX < self.body:getX() and not self.canJump and sHeight > 32 then
-    self.jumpWall = right
+   -- self.jumpWall = right
   --is it to the right?
   elseif sX > self.body:getX() and not self.canJump and sHeight > 32 then
-    self.jumpWall = left
+    --self.jumpWall = left
   end
 end
 
@@ -240,7 +240,7 @@ function mario:keyPressed(key)
   if key == self.key.up then
     self:jump()
   end
-  mario.active_tool:keypressed(key)
+  mario.active_tool:keypressed(self, key)
 end
 
 function mario:update(dt)

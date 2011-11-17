@@ -17,6 +17,9 @@ function portal_gun:update(dt)
 	end
 	self.mouse.x = x
 	self.mouse.y = y
+	for  i=1, #self.pulses do 
+		self.pulses[i]:update(dt);
+	end
 end
 function drawHorLine(mx, my, y) 
 	if (my > y) then 
@@ -107,10 +110,12 @@ function drawSlopedLine(slope,b, dx,dy,mx, my)
 	end
 	drawStraighLine(mx,my,x, y);
 end
-function portal_gun:keypressed(key ) 
+function portal_gun:keypressed(mario, key ) 
 
+	local mx = mario.body:getX()-screenX ;
+	local my = mario.body:getY();
 	if (key == 'z') then 
-		self.pulses[#self.pulses +1] = pulse:new()
+		self.pulses[#self.pulses +1] = pulse:new(mx, my)
 	end
 
 
@@ -133,5 +138,8 @@ function portal_gun:draw(mario)
 		local nx = -b/slope
   		love.graphics.print("gun should show. Slope y = " .. slope ..  " " .. b .. " " .. dx .. " " .. dy .. " " .. nx , 32, 120)
 
+	end
+	for  i=1, #self.pulses do 
+		self.pulses[i]:draw();
 	end
 end
